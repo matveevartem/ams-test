@@ -26,6 +26,7 @@ final class Application
 
     /**
      * Loads environments from .env file
+     * @return void
      */
     private function loadEnv(): void
     {
@@ -41,6 +42,7 @@ final class Application
 
     /**
      * Sets web routes
+     * @return void
      */
     private function setRoutes(): void
     {
@@ -69,6 +71,24 @@ final class Application
     }
 
     /**
+     * Returns database class name
+     * @return string
+     * @throws \Exception
+     */
+    private function getTypeDB(): string
+    {
+        switch (getenv('DB_TYPE')) {
+            case self::DB_MYSQL:
+                return MysqlDatabase::class;
+            case self::DB_PGSQL:
+                // не реализовано
+                break;
+        }
+
+        throw new \Exception('Incorrect database');
+    }
+
+    /**
      * Returns an instance of itself
      * @return Application
      */
@@ -91,26 +111,17 @@ final class Application
         $this->setRoutes();
     }
 
-    private function getTypeDB()
-    {
-        switch (getenv('DB_TYPE')) {
-            case self::DB_MYSQL:
-                return MysqlDatabase::class;
-            case self::DB_PGSQL:
-                // не реализовано
-                break;
-        }
-
-        throw new \Exception('Incorrect database');
-    }
-
-    public function migrate()
+    /**
+     * Applies DB migrations
+     * @return bool
+     */
+    public function migrate(): bool
     {
         $this->loadEnv();
 
         $dbClass = $this->getTypeDB();
 
         $migrate = new Migrate(new $dbClass());
-        $migrate->up();
+        return $migrate->up();
     }
 }

@@ -6,7 +6,8 @@ use Exception;
 
 class Validator
 {
-    public static function validate(array $data, array $rules) {
+    public static function validate(array $data, array $rules): void
+    {
         foreach($rules as $key => $rule) {
             foreach($rule as $item) {
                 $validatorsInfo = explode(':', $item);

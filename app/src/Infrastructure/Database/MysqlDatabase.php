@@ -278,6 +278,12 @@ class MysqlDatabase implements IDatabase
         $this->execute($sql);
     }
 
+    /** 
+     * Returns result of raw sql query
+     * @param string $query sql query
+     * @param array $params params for prepared PDO query
+     * @return array query result
+     */
     public function rawQuery(string $query, array $params = []): array
     {
         try {

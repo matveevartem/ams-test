@@ -31,6 +31,10 @@ class Task11 extends Entity implements ITask11
         return $this->modelName;
     }
 
+    /**
+     * @param bool $needFormat if false date will return in default format else will return in short local format
+     * @return string
+     */
     public function getEndTime(): string|bool
     {
         $timeEnd = $this->endTime;

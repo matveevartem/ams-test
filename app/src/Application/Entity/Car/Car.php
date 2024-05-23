@@ -73,6 +73,11 @@ class Car extends Entity implements ICar
         return $this->markName;
     }
 
+
+    /**
+     * @param bool $needFormat if false date will return in default format else will return in short local format
+     * @return string
+     */
     public function getTimeStart(bool $needFormat = false): string
     {
         $timeStart = $this->timeStart;
@@ -87,6 +92,10 @@ class Car extends Entity implements ICar
         return $timeStart;
     }
 
+    /**
+     * @param bool $needFormat if false date will return in default format else will return in short local format
+     * @return string
+     */
     public function getTimeEnd(bool $needFormat = false): string
     {
         $timeEnd = $this->timeEnd;
@@ -108,6 +117,9 @@ class Car extends Entity implements ICar
         return $this->workName;
     }
 
+    /**
+     * @param bool $needFormat if false will return float else will return string as local currency format
+     */
     public function getWorkCost(bool $needFormat = false): float|string|null
     {
         if (!$this->workCost) {

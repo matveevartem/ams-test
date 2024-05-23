@@ -22,6 +22,9 @@ class Migrate implements IMigrate
                          'migrations';
     protected IDatabase $db;
 
+    /**
+     * @param IDatabase $db current database object
+     */
     public function __construct(IDatabase $db)
     {
         $this->db = $db;
@@ -30,7 +33,10 @@ class Migrate implements IMigrate
         $this->getImplemented();
     }
 
-    private function getImplemented()
+    /**
+     * Builds a list of applied migrations
+     */
+    private function getImplemented(): void
     {
         $files = scandir(self::MIGRATE_DIR . DIRECTORY_SEPARATOR . 'implemented', SCANDIR_SORT_ASCENDING);
 
@@ -51,6 +57,10 @@ class Migrate implements IMigrate
         }
     }
 
+    /**
+     * Applies DB migrations
+     * @return bool
+     */
     public function up(): bool
     {
         $files = scandir(self::MIGRATE_DIR, SCANDIR_SORT_ASCENDING);

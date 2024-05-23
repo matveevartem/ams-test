@@ -40,6 +40,9 @@ class Task12 extends Entity implements ITask12
         return $this->workTime;
     }
 
+    /**
+     * @param bool $needFormat if false will return float else will return string as local currency format
+     */
     public function getWorkCost(bool $needFormat = false): float|string
     {
         $formatter = new NumberFormatter("ru-RU", NumberFormatter::CURRENCY);
