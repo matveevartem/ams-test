@@ -1,0 +1,23 @@
+{
+    "name": "matveevartem/ams",
+    "description": "AMS Test Task",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "license": "free",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Artem Matveev"
+        }
+    ],
+    "minimum-stability": "dev"
+}
