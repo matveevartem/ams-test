@@ -24,10 +24,18 @@ class CarRepository extends Repository implements ICarRepository
             mrk.name as markName,
             bdt.id as bodyTypeId,
             bdt.name as bodyTypeName,
-            wrk.id as workId,
-            wrk.name as workName,
-            wrk.cost as workCost,
-            wrk.time as workTime
+            CONCAT(
+                '[',
+                GROUP_CONCAT(
+                    JSON_OBJECT(
+                        'id', IFNULL(wrk.id, 0),
+                        'name', IFNULL(wrk.name, 'Нет доступных видов работ'),
+                        'cost', IFNULL(wrk.cost, ''),
+                        'time', IFNULL(wrk.time, '')
+                    )
+                ), 
+                ']'
+            ) AS works
         FROM car_model mdl
         INNER JOIN car_mark mrk ON(mrk.id = mdl.mark_id)
         INNER JOIN car_body_type bdt ON(bdt.id = mdl.body_type_id) 

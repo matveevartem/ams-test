@@ -22,20 +22,18 @@ class Car extends Entity implements ICar
     public ?float $workTime;
     public string $timeStart;
     public string $timeEnd;
+    public string $works;
 
     protected array $cols = [
         'modelId',
         'markId',
         'bodyTypeId',
-        'workId',
         'modelName',
         'markName',
         'bodyTypeName',
         'timeStart',
         'timeEnd',
-        'workName',
-        'workCost',
-        'workTime',
+        'works'
     ];
 
     public function getModelId(): int
@@ -51,11 +49,6 @@ class Car extends Entity implements ICar
     public function getBodyTypeId(): int
     {
         return $this->bodyTypeId;
-    }
-
-    public function getWorkId(): ?int
-    {
-        return $this->workId;
     }
 
     public function getBodyTypeName(): string
@@ -112,27 +105,8 @@ class Car extends Entity implements ICar
         return $timeEnd;
     }
 
-    public function getWorkName(): ?string
+    public function getWorks(): ?array
     {
-        return $this->workName;
-    }
-
-    /**
-     * @param bool $needFormat if false will return float else will return string as local currency format
-     */
-    public function getWorkCost(bool $needFormat = false): float|string|null
-    {
-        if (!$this->workCost) {
-            return null;
-        }
-
-        $formatter = new NumberFormatter("ru-RU", NumberFormatter::CURRENCY);
-
-        return $needFormat ? $formatter->format($this->workCost) : $this->workCost;
-    }
-
-    public function getWorkTime(): ?float
-    {
-        return $this->workTime;
+        return json_decode($this->works, true);
     }
 }

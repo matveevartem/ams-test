@@ -78,12 +78,12 @@ AND wrk.cost > :cost;";
 
                     data['works'].forEach(el => {
                         let li = document.createElement('li');
-                        li.innerHTML = el['workName'];
-                        if (el['workId']) {
+                        li.innerHTML = el['name'];
+                        if (el['id']) {
                             li.innerHTML += ' - '
-                                + el['workCost'] 
+                                + el['cost'] 
                                 + ' ('
-                                + el['workTime']
+                                + el['time']
                                 + ' час.)';
                         }
                         carWorkModal.appendChild(li);

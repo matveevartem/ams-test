@@ -28,30 +28,8 @@ class CarController extends Controller
             'bodyTypeName' => $data[0]->getBodyTypeName(),
             'timeStart' => $data[0]->getTimeStart(true),
             'timeEnd' => $data[0]->getTimeEnd(true),
-            'works' => [],
+            'works' => $data[0]->getWorks(),
         ];
-
-        foreach ($data as $work) {
-            if (!$work->getWorkId()) {
-                continue;
-            }
-
-            $car['works'][] = [
-                'workId' => $work->getWorkId(),
-                'workName' => $work->getWorkName(),
-                'workCost' => $work->getWorkCost(true),
-                'workTime' => $work->getWorkTime(),
-            ];
-        }
-
-        if (empty($car['works'])) {
-            $car['works'][] = [
-                'workId' => 0,
-                'workName' => 'Нет доступных работ',
-                'workCost' => '',
-                'workTime' => '',
-            ];
-        }
 
         Response::json($car);
     }
